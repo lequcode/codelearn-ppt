@@ -311,77 +311,73 @@
             background: var(--light);
         }
         
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1000px;
+        .pricing-single {
+            max-width: 600px;
             margin: 0 auto;
         }
         
         .price-card {
             background: white;
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 3rem;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 30px rgba(37, 99, 235, 0.15);
         }
         
-        .price-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .price-card.popular {
-            border: 2px solid var(--primary);
-            position: relative;
-        }
-        
-        .price-card.popular::before {
-            content: '推荐';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
+        .price-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
             color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .price-card h3 {
-            font-size: 1.3rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
         }
         
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .price-original {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
             margin-bottom: 0.5rem;
         }
         
-        .price small {
-            font-size: 0.9rem;
-            color: var(--gray);
+        .price-final {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #EF4444;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-final small {
+            font-size: 1rem;
             font-weight: 400;
+        }
+        
+        .price-label {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 2rem;
         }
         
         .price-features {
             list-style: none;
             text-align: left;
             margin: 2rem 0;
-            padding: 0 1rem;
         }
         
         .price-features li {
-            padding: 0.6rem 0;
+            padding: 0.8rem 0;
             border-bottom: 1px solid #F1F5F9;
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
         .price-features li:last-child {
@@ -391,32 +387,110 @@
         .price-features li::before {
             content: '✓';
             color: var(--primary);
-            margin-right: 0.5rem;
+            margin-right: 0.8rem;
             font-weight: 600;
         }
         
         .price-btn {
             width: 100%;
-            padding: 1rem;
-            border-radius: 10px;
+            padding: 1.2rem;
+            border-radius: 12px;
             font-weight: 600;
+            font-size: 1.1rem;
             border: none;
             cursor: pointer;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
             transition: all 0.3s;
         }
         
-        .price-card.popular .price-btn {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .price-card:not(.popular) .price-btn {
-            background: var(--light);
-            color: var(--dark);
-        }
-        
         .price-btn:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .price-limit {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #FEF2F2;
+            border-radius: 10px;
+            color: #DC2626;
+            font-size: 0.95rem;
+        }
+        
+        .price-limit strong {
+            font-weight: 700;
+        }
+        
+        /* 弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: #F1F5F9;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background: #E2E8F0;
+        }
+        
+        .modal img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        
+        .modal h3 {
+            margin-top: 1rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        
+        .modal p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
         
         /* FAQ区 */
@@ -513,10 +587,6 @@
             
             .features-grid,
             .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .problem-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -664,44 +734,37 @@
     <section id="pricing" class="pricing">
         <div class="section-title">
             <h2>定价方案</h2>
-            <p>透明定价，无隐藏费用</p>
+            <p>一次付费，终身使用</p>
         </div>
-        <div class="pricing-grid">
+        <div class="pricing-single">
             <div class="price-card">
-                <h3>基础版</h3>
-                <div class="price">2.8万<small>/次</small></div>
+                <div class="price-badge">限时优惠 前20名立减1000元</div>
+                <div class="price-original">原价 ¥2980</div>
+                <div class="price-final">¥1980<small> 终身免费</small></div>
+                <div class="price-label">包含全部功能，无任何隐藏费用</div>
                 <ul class="price-features">
                     <li>系统部署服务</li>
-                    <li>基础功能培训</li>
+                    <li>功能模块培训</li>
                     <li>1年免费维护</li>
-                    <li>基础题库</li>
+                    <li>拓展题库 + 课程模板</li>
                 </ul>
-                <button class="price-btn">咨询详情</button>
-            </div>
-            <div class="price-card popular">
-                <h3>标准版</h3>
-                <div class="price">3.8万<small>/次</small></div>
-                <ul class="price-features">
-                    <li>系统部署服务</li>
-                    <li>深度功能培训</li>
-                    <li>1年免费维护</li>
-                    <li>扩展题库 + 课程模板</li>
-                </ul>
-                <button class="price-btn">立即咨询</button>
-            </div>
-            <div class="price-card">
-                <h3>定制版</h3>
-                <div class="price">5万<small>起</small></div>
-                <ul class="price-features">
-                    <li>按需功能定制</li>
-                    <li>深度定制培训</li>
-                    <li>长期维护协议</li>
-                    <li>专属技术支持</li>
-                </ul>
-                <button class="price-btn">咨询详情</button>
+                <button class="price-btn" onclick="showContact()">立即咨询</button>
+                <div class="price-limit">
+                    <strong>仅剩 17 个名额</strong>，优惠随时结束
+                </div>
             </div>
         </div>
     </section>
+    
+    <!-- 弹窗 -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img src="/Users/mac/Desktop/立即咨询.jpg" alt="扫码咨询">
+            <h3>扫码添加客服微信</h3>
+            <p>备注"编程教学系统"，快速对接</p>
+        </div>
+    </div>
     
     <!-- FAQ -->
     <section id="faq">
@@ -774,6 +837,22 @@
                 nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
             } else {
                 nav.style.boxShadow = 'none';
+            }
+        });
+        
+        // 弹窗功能
+        function showContact() {
+            document.getElementById('contactModal').classList.add('show');
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('show');
+        }
+        
+        // 点击背景关闭
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
         });
     </script>
