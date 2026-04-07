@@ -8,410 +8,544 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
     <style>
         :root {
-            --r-main-color: #1a1a2e;
-            --r-link-color: #4ECDC4;
-            --r-heading-color: #16213e;
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #60A5FA;
+            --accent: #0EA5E9;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --light: #F1F5F9;
         }
+        
         .reveal {
             font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
         }
+        
         .reveal h1, .reveal h2, .reveal h3 {
-            color: #16213e;
+            color: var(--primary-dark);
             text-transform: none;
-        }
-        .reveal h1 { font-size: 2.8em; }
-        .reveal h2 { font-size: 1.8em; }
-        .reveal h3 { font-size: 1.3em; }
-        
-        .cover-slide {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .cover-slide h1, .cover-slide p {
-            color: white !important;
+            font-weight: 600;
         }
         
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.7em;
+        .reveal h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
         }
-        .comparison-table th, .comparison-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        .comparison-table th {
-            background: #4ECDC4;
-            color: white;
-        }
-        .comparison-table .yes { color: #2ECC71; font-weight: bold; }
-        .comparison-table .no { color: #E74C3C; }
         
-        .feature-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .reveal h2 {
+            font-size: 1.8em;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.3em;
+            display: inline-block;
         }
-        .feature-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 16px;
-            padding: 25px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .feature-card .icon { font-size: 3em; margin-bottom: 15px; }
-        .feature-card h4 { margin: 0 0 10px 0; color: #16213e; }
-        .feature-card p { font-size: 0.8em; color: #555; margin: 0; }
         
-        .delivery-list { text-align: left; max-width: 800px; margin: 0 auto; }
-        .delivery-item {
-            display: flex;
-            align-items: flex-start;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border-left: 4px solid #4ECDC4;
-        }
-        .delivery-item .num {
-            background: #4ECDC4;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .delivery-item .content h4 { margin: 0 0 5px 0; color: #16213e; }
-        .delivery-item .content p { margin: 0; font-size: 0.85em; color: #666; }
-        
-        .pricing-cards { display: flex; justify-content: center; gap: 30px; }
-        .pricing-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 280px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 2px solid #eee;
-        }
-        .pricing-card.featured {
-            border-color: #4ECDC4;
-            transform: scale(1.05);
-        }
-        .pricing-card h3 { color: #666; margin-top: 0; }
-        .pricing-card .price { font-size: 2.5em; color: #4ECDC4; margin: 20px 0; }
-        .pricing-card .price span { font-size: 0.3em; color: #999; }
-        .pricing-card ul { list-style: none; padding: 0; text-align: left; font-size: 0.85em; }
-        .pricing-card li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .pricing-card li::before { content: "✓ "; color: #2ECC71; }
-        
-        .contact-info { font-size: 1.1em; }
-        .contact-info p { margin: 15px 0; }
-        .contact-info .highlight { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* 封面样式 */
+        .cover-title {
+            font-size: 3em !important;
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: bold;
+            background-clip: text;
         }
         
-        .logo { width: 120px; height: 120px; margin-bottom: 20px; }
+        .cover-subtitle {
+            font-size: 1.4em;
+            color: var(--gray);
+            margin-top: 1em;
+        }
+        
+        .cover-brand {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5em 2em;
+            border-radius: 50px;
+            margin-top: 2em;
+            font-weight: 500;
+        }
+        
+        /* 卡片布局 */
+        .card-container {
+            display: flex;
+            gap: 1.5em;
+            margin-top: 1.5em;
+        }
+        
+        .card {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5em;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+            border-top: 4px solid var(--primary);
+            text-align: left;
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.1em;
+            margin-bottom: 0.8em;
+            border: none;
+            padding: 0;
+        }
+        
+        .card p {
+            color: var(--gray);
+            font-size: 0.85em;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* 列表样式 */
+        .feature-list {
+            text-align: left;
+            font-size: 1.1em;
+            line-height: 2;
+        }
+        
+        .feature-list li {
+            color: var(--dark);
+            margin: 0.5em 0;
+        }
+        
+        .feature-list li::marker {
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+        
+        /* 架构图 */
+        .arch-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1em 1.5em;
+            border-radius: 12px;
+            margin: 0.5em;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .arch-box.secondary {
+            background: white;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+        }
+        
+        /* 价格卡片 */
+        .price-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2em;
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
+            text-align: center;
+            min-width: 250px;
+        }
+        
+        .price-card.featured {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .price-card h3 {
+            font-size: 1.4em;
+            border: none;
+            padding: 0;
+            color: var(--primary-dark);
+        }
+        
+        .price-card.featured h3 {
+            color: white;
+        }
+        
+        .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5em 0;
+        }
+        
+        .price-card.featured .price {
+            color: white;
+        }
+        
+        .price small {
+            font-size: 0.4em;
+            font-weight: 400;
+        }
+        
+        .price-features {
+            text-align: left;
+            font-size: 0.8em;
+            color: var(--gray);
+            margin-top: 1.5em;
+        }
+        
+        .price-features li {
+            margin: 0.5em 0;
+        }
+        
+        .price-card.featured .price-features {
+            color: rgba(255,255,255,0.9);
+        }
+        
+        /* FAQ */
+        .faq-item {
+            text-align: left;
+            margin: 1em 0;
+            padding: 1em;
+            background: var(--light);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .faq-item strong {
+            color: var(--primary-dark);
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        
+        .faq-item p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.9em;
+        }
+        
+        /* 联系方式 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2em;
+            margin-top: 2em;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-item h4 {
+            color: var(--primary);
+            margin: 0.5em 0;
+            font-size: 1.1em;
+        }
+        
+        .contact-item p {
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        /* 结尾页 */
+        .thanks {
+            font-size: 4em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 进度条 */
+        .progress-container {
+            display: flex;
+            gap: 1em;
+            margin-top: 1em;
+        }
+        
+        .progress-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5em;
+        }
+        
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 4px;
+        }
+        
+        /* 表格 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            font-size: 0.9em;
+        }
+        
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 0.8em;
+            text-align: left;
+        }
+        
+        .data-table td {
+            padding: 0.6em 0.8em;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: var(--light);
+        }
+        
+        /* 引用块 */
+        blockquote {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1em 1.5em;
+            margin: 1em 0;
+            border-radius: 0 12px 12px 0;
+        }
     </style>
 </head>
 <body>
     <div class="reveal">
         <div class="slides">
             
-            <!-- 第1页：封面 -->
-            <section class="cover-slide">
-                <img src="https://img.iconsfly.com/svg/256/3293/code.png" class="logo">
-                <h1>CodeLearn 编程教学系统</h1>
-                <p>独立部署 · 源码交付 · 永久拥有</p>
-                <p style="font-size: 0.6em; margin-top: 50px; opacity: 0.8;">
-                    为少儿编程机构打造的专业教学平台
+            <!-- 封面 -->
+            <section>
+                <h1 class="cover-title">CodeLearn</h1>
+                <p class="cover-subtitle">少儿编程教学系统</p>
+                <p class="cover-subtitle" style="font-size: 1.2em; margin-top: 0.5em;">独立部署 / 专业OJ / 课程管理</p>
+                <div class="cover-brand">产品介绍</div>
+            </section>
+            
+            <!-- 传统SaaS困境 -->
+            <section>
+                <h2>传统SaaS平台的困境</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>数据安全隐患</h3>
+                        <p>学生信息存储在第三方平台，存在数据泄露风险，家长担忧</p>
+                    </div>
+                    <div class="card">
+                        <h3>功能同质化严重</h3>
+                        <p>千篇一律的功能模板，无法满足学校的个性化教学需求</p>
+                    </div>
+                </div>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>费用持续上涨</h3>
+                        <p>按年收费，学生规模扩大后成本剧增，长期负担沉重</p>
+                    </div>
+                    <div class="card">
+                        <h3>服务响应慢</h3>
+                        <p>问题反馈后等待时间长，影响正常教学进度</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 解决方案 -->
+            <section>
+                <h2>CodeLearn 独立部署版</h2>
+                <p style="font-size: 1.3em; color: var(--dark); margin: 1.5em 0;">
+                    将系统部署到学校自有服务器<br>
+                    数据完全自主可控
+                </p>
+                <div class="arch-box">学校自有服务器</div>
+                <div style="margin: 1em 0;">↓</div>
+                <div class="arch-box">独立数据库</div>
+                <div style="margin: 1em 0;">↓</div>
+                <div class="arch-box">定制化开发</div>
+            </section>
+            
+            <!-- 核心优势 -->
+            <section>
+                <h2>为什么选择CodeLearn</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <h3>数据自主可控</h3>
+                        <p>部署在学校本地服务器，数据100%归属校方，彻底消除隐私顾虑</p>
+                    </div>
+                    <div class="card">
+                        <h3>按需定制开发</h3>
+                        <p>根据学校实际情况定制功能，真正贴合教学需求</p>
+                    </div>
+                </div>
+                <div class="card-container" style="margin-top: 1.5em;">
+                    <div class="card">
+                        <h3>一次付费永久使用</h3>
+                        <p>无年费、无抽成，学生规模扩大不再增加额外成本</p>
+                    </div>
+                    <div class="card">
+                        <h3>专属技术支持</h3>
+                        <p>提供持续的功能更新和技术维护，服务响应及时</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 系统架构 -->
+            <section>
+                <h2>完整的系统架构</h2>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 0.8em; margin-top: 1em;">
+                    <div class="arch-box secondary" style="font-size: 1.1em;">前端：Vue3 + Element Plus</div>
+                    <div style="color: var(--primary); font-size: 1.5em;">▲</div>
+                    <div class="arch-box secondary" style="font-size: 1.1em;">后端：Node.js + Express + MongoDB</div>
+                    <div style="color: var(--primary); font-size: 1.5em;">▲</div>
+                    <div class="arch-box secondary" style="font-size: 1.1em;">判题引擎：多语言支持（Python/C++/Java/JS）</div>
+                </div>
+                <p style="color: var(--gray); margin-top: 1.5em; font-size: 0.9em;">
+                    支持 Windows / Linux 服务器<br>
+                    提供完整的安装部署文档和技术支持
                 </p>
             </section>
             
-            <!-- 第2页：痛点 -->
+            <!-- 课程管理 -->
             <section>
-                <h2>传统 SaaS 平台的困境</h2>
-                <table class="comparison-table" style="margin-top: 30px;">
+                <h2>课程管理体系</h2>
+                <ul class="feature-list">
+                    <li>完整的课程创建、编辑、发布流程</li>
+                    <li>支持多个班级、多个课程并行管理</li>
+                    <li>学生分组、作业布置、批改功能</li>
+                    <li>学习进度实时跟踪，数据可视化展示</li>
+                    <li>课程资源上传、作业提交与管理</li>
+                    <li>教学日历，合理安排课程节奏</li>
+                </ul>
+            </section>
+            
+            <!-- OJ判题 -->
+            <section>
+                <h2>专业OJ判题引擎</h2>
+                <ul class="feature-list">
+                    <li>支持多种编程语言：Python、C++、Java、JavaScript</li>
+                    <li>实时判题，立即反馈运行结果</li>
+                    <li>多种题型支持：选择题、填空题、编程题</li>
+                    <li>防作弊机制，保障测评公平性</li>
+                    <li>详细的错误提示，帮助学生定位问题</li>
+                    <li>题库管理，支持自定义添加题目</li>
+                </ul>
+            </section>
+            
+            <!-- 交付清单 -->
+            <section>
+                <h2>标准版交付内容</h2>
+                <table class="data-table">
                     <tr>
-                        <th>问题</th>
-                        <th>描述</th>
-                        <th>影响</th>
+                        <th>项目</th>
+                        <th>内容说明</th>
                     </tr>
                     <tr>
-                        <td>账号租赁制</td>
-                        <td>按年付费，停费即停用</td>
-                        <td>年年在涨价，主动权在平台</td>
+                        <td>系统源码</td>
+                        <td>完整的前后端代码，可自行二次开发</td>
                     </tr>
                     <tr>
-                        <td>内容被绑定</td>
-                        <td>课件题库无法导出</td>
-                        <td>换平台 = 从零开始</td>
+                        <td>部署文档</td>
+                        <td>详细的服务器部署和环境配置指南</td>
                     </tr>
                     <tr>
-                        <td>数据不安全</td>
-                        <td>学生数据在别人服务器</td>
-                        <td>隐私合规风险</td>
+                        <td>题库资源</td>
+                        <td>Python/C++ 入门级题库（200+道）</td>
                     </tr>
                     <tr>
-                        <td>无法定制</td>
-                        <td>只能使用平台提供的功能</td>
-                        <td>无法适配自己的教学特色</td>
+                        <td>课程模板</td>
+                        <td>基础课程模板，可直接使用或修改</td>
+                    </tr>
+                    <tr>
+                        <td>技术培训</td>
+                        <td>一次线上培训，确保团队掌握系统使用</td>
+                    </tr>
+                    <tr>
+                        <td>后期维护</td>
+                        <td>一年的免费Bug修复和必要的技术支持</td>
                     </tr>
                 </table>
             </section>
             
-            <!-- 第3页：解决方案 -->
-            <section class="cover-slide" data-background-color="#2ECC71">
-                <h1>CodeLearn 独立部署版</h1>
-                <p style="font-size: 1.2em;">把系统掌握在自己手里</p>
-            </section>
-            
-            <!-- 第4页：核心优势 -->
+            <!-- 定价方案 -->
             <section>
-                <h2>为什么选择 CodeLearn？</h2>
-                <div class="feature-cards" style="margin-top: 40px;">
-                    <div class="feature-card">
-                        <div class="icon">💎</div>
-                        <h4>源码交付</h4>
-                        <p>完整前端+后端源码<br>一次买断，永久拥有</p>
+                <h2>定价方案</h2>
+                <div style="display: flex; justify-content: center; gap: 2em; margin-top: 1.5em;">
+                    <div class="price-card">
+                        <h3>基础版</h3>
+                        <div class="price">2.8万<small>/次</small></div>
+                        <ul class="price-features">
+                            <li>系统部署服务</li>
+                            <li>基础功能培训</li>
+                            <li>1年免费维护</li>
+                            <li>基础题库</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">🔐</div>
-                        <h4>数据自主</h4>
-                        <p>课件/题库/学生数据<br>100% 归你所有</p>
+                    <div class="price-card featured">
+                        <h3>标准版</h3>
+                        <div class="price">3.8万<small>/次</small></div>
+                        <ul class="price-features">
+                            <li>系统部署服务</li>
+                            <li>深度功能培训</li>
+                            <li>1年免费维护</li>
+                            <li>扩展题库 + 课程模板</li>
+                        </ul>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">🚀</div>
-                        <h4>灵活扩展</h4>
-                        <p>基于 Vue3 + Node.js<br>支持二次开发</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="icon">💰</div>
-                        <h4>成本可控</h4>
-                        <p>服务器费用自付<br>不被平台年年涨价</p>
+                    <div class="price-card">
+                        <h3>定制版</h3>
+                        <div class="price">5万<small>起</small></div>
+                        <ul class="price-features">
+                            <li>按需功能定制</li>
+                            <li>深度定制培训</li>
+                            <li>长期维护协议</li>
+                            <li>专属技术支持</li>
+                        </ul>
                     </div>
                 </div>
             </section>
             
-            <!-- 第5页：系统架构 -->
+            <!-- FAQ -->
             <section>
-                <h2>完整的系统架构</h2>
-                <p style="color: #666; margin-top: 20px;">Vue3 前端 + Node.js 后端 + MongoDB 数据库 + Docker 判题</p>
-                <div class="feature-cards" style="margin-top: 40px;">
-                    <div class="feature-card" style="width: 200px;">
-                        <div class="icon">🎨</div>
-                        <h4>前端</h4>
-                        <p>Vue3 + Element Plus<br>在线编程编辑器</p>
-                    </div>
-                    <div class="feature-card" style="width: 200px;">
-                        <div class="icon">⚙️</div>
-                        <h4>后端</h4>
-                        <p>Node.js + Express<br>RESTful API</p>
-                    </div>
-                    <div class="feature-card" style="width: 200px;">
-                        <div class="icon">💾</div>
-                        <h4>数据库</h4>
-                        <p>MongoDB<br>高效数据存储</p>
-                    </div>
-                    <div class="feature-card" style="width: 200px;">
-                        <div class="icon">🏆</div>
-                        <h4>判题</h4>
-                        <p>Docker 沙箱<br>安全隔离执行</p>
-                    </div>
+                <h2>常见问题</h2>
+                <div class="faq-item">
+                    <strong>需要什么样的服务器？</strong>
+                    <p>最低配置：2核CPU / 4GB内存 / 50GB硬盘，推荐使用Linux服务器</p>
+                </div>
+                <div class="faq-item">
+                    <strong>部署需要多长时间？</strong>
+                    <p>通常1-3个工作日完成，包括环境配置、数据迁移和培训</p>
+                </div>
+                <div class="faq-item">
+                    <strong>维护期结束后如何处理？</strong>
+                    <p>可选择续签维护协议（年费为首次费用的20%），或自行维护</p>
+                </div>
+                <div class="faq-item">
+                    <strong>支持二次开发吗？</strong>
+                    <p>提供完整源码，可自行或委托第三方进行功能扩展</p>
                 </div>
             </section>
             
-            <!-- 第6页：课程体系 -->
+            <!-- 立即咨询 -->
             <section>
-                <h2>课程管理体系</h2>
-                <p style="color: #666;">支持 Scratch / Python / C++ 全年龄段教学</p>
-                <div class="feature-cards" style="margin-top: 30px;">
-                    <div class="feature-card" style="border-left: 4px solid #FF6B6B;">
-                        <div class="icon">🧒</div>
-                        <h4>Scratch</h4>
-                        <p>图形化编程<br>初级 · 中级 · 高级</p>
+                <h2>立即咨询</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h4>联系电话</h4>
+                        <p>请联系顾问获取</p>
                     </div>
-                    <div class="feature-card" style="border-left: 4px solid #4ECDC4;">
-                        <div class="icon">🐍</div>
-                        <h4>Python</h4>
-                        <p>人工智能时代语言<br>初级 · 中级 · 高级</p>
+                    <div class="contact-item">
+                        <h4>商务邮箱</h4>
+                        <p>lequcode@outlook.com</p>
                     </div>
-                    <div class="feature-card" style="border-left: 4px solid #45B7D1;">
-                        <div class="icon">⚡</div>
-                        <h4>C++</h4>
-                        <p>信奥竞赛首选<br>初级 · 中级 · 高级</p>
+                    <div class="contact-item">
+                        <h4>官方网站</h4>
+                        <p>http://124.223.8.41</p>
                     </div>
                 </div>
-                <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
-                    支持 PPT/PDF/视频/图文  |  章节锁控制  |  闯关式学习
+                <p style="margin-top: 3em; color: var(--gray);">
+                    期待与您合作，共同打造优质的编程教学环境
                 </p>
             </section>
             
-            <!-- 第7页：题库系统 -->
+            <!-- 感谢 -->
             <section>
-                <h2>专业 OJ 判题引擎</h2>
-                <div style="display: flex; gap: 40px; margin-top: 30px;">
-                    <div style="flex: 1; text-align: left;">
-                        <h3 style="color: #4ECDC4;">核心能力</h3>
-                        <ul style="font-size: 0.9em; line-height: 2;">
-                            <li>支持 Python / C++ / Java</li>
-                            <li>Docker 沙箱隔离，安全防攻击</li>
-                            <li>毫秒级判题反馈</li>
-                            <li>支持高并发</li>
-                        </ul>
-                    </div>
-                    <div style="flex: 1; text-align: left;">
-                        <h3 style="color: #4ECDC4;">题库管理</h3>
-                        <ul style="font-size: 0.9em; line-height: 2;">
-                            <li>编程题/选择题/填空题</li>
-                            <li>Excel 批量导入，一键导入千题</li>
-                            <li>难度分级 / 标签分类</li>
-                            <li>错题自动收集</li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
-                    <h3 style="color: #45B7D1;">竞赛与考试</h3>
-                    <p style="font-size: 0.9em;">支持 ACM / OI 两种赛制  |  实时排名  |  封榜功能  |  防作弊机制</p>
-                </div>
-            </section>
-            
-            <!-- 第8页：交付清单 -->
-            <section>
-                <h2>标准版交付内容</h2>
-                <div class="delivery-list">
-                    <div class="delivery-item">
-                        <div class="num">1</div>
-                        <div class="content">
-                            <h4>完整系统源码</h4>
-                            <p>前端（Vue3）+ 后端（Node.js）+ 数据库设计 + 部署脚本</p>
-                        </div>
-                    </div>
-                    <div class="delivery-item">
-                        <div class="num">2</div>
-                        <div class="content">
-                            <h4>腾讯云部署服务（1次）</h4>
-                            <p>服务器配置 + 域名解析 + HTTPS + 系统初始化</p>
-                        </div>
-                    </div>
-                    <div class="delivery-item">
-                        <div class="num">3</div>
-                        <div class="content">
-                            <h4>线上师训（3小时）</h4>
-                            <p>系统操作培训 + 题库批量导入实操 + 课程发布</p>
-                        </div>
-                    </div>
-                    <div class="delivery-item">
-                        <div class="num">4</div>
-                        <div class="content">
-                            <h4>6个月技术支持</h4>
-                            <p>Bug修复 + 环境维护 + 使用指导</p>
-                        </div>
-                    </div>
-                    <div class="delivery-item">
-                        <div class="num">🎁</div>
-                        <div class="content">
-                            <h4>赠品：内容导入工具包</h4>
-                            <p>题库导入模板（Excel）+ 50道测试样例题</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 第9页：定价 -->
-            <section>
-                <h2>定价方案</h2>
-                <div class="pricing-cards" style="margin-top: 40px;">
-                    <div class="pricing-card">
-                        <h3>基础版</h3>
-                        <div class="price">¥1,980<span>/次</span></div>
-                        <ul>
-                            <li>完整系统源码</li>
-                            <li>1次云部署</li>
-                            <li>3小时师训</li>
-                            <li>3个月技术支持</li>
-                            <li>导入模板 + 20题</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-card featured">
-                        <h3>标准版</h3>
-                        <div class="price" style="color: #667eea;">¥2,980<span>/次</span></div>
-                        <ul>
-                            <li>完整系统源码</li>
-                            <li>1次云部署</li>
-                            <li>3小时师训</li>
-                            <li>6个月技术支持</li>
-                            <li>导入模板 + 50题</li>
-                        </ul>
-                        <p style="color: #667eea; font-weight: bold; margin-top: 15px;">推荐</p>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>定制版</h3>
-                        <div class="price">¥5,980<span>起</span></div>
-                        <ul>
-                            <li>源码 + 定制开发</li>
-                            <li>无限部署次数</li>
-                            <li>专属师训</li>
-                            <li>12个月技术支持</li>
-                            <li>代填充100题+课件</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 第10页：FAQ -->
-            <section>
-                <h2>常见问题</h2>
-                <div style="text-align: left; max-width: 800px; margin: 30px auto; font-size: 0.8em;">
-                    <div style="margin: 15px 0; padding: 15px; background: #fff3cd; border-radius: 12px; border-left: 4px solid #ffc107;">
-                        <strong style="color: #856404;">Q: 你们包含课件和题库吗？</strong>
-                        <p style="margin: 8px 0 0 0; color: #666;">
-                            A: 我们交付的是完整的教学系统框架，不是内容产品。课件题库需要您自己填充，系统支持Excel批量导入，非常方便。这样您完全掌控内容，不会被平台绑定。
-                        </p>
-                    </div>
-                    <div style="margin: 15px 0; padding: 15px; background: #d1ecf1; border-radius: 12px; border-left: 4px solid #17a2b8;">
-                        <strong style="color: #0c5460;">Q: 服务器需要自己买吗？</strong>
-                        <p style="margin: 8px 0 0 0; color: #666;">
-                            A: 是的，您需要自己购买腾讯云/阿里云服务器（约300-500元/年）。我们包首次部署，之后您可以自由迁移。
-                        </p>
-                    </div>
-                    <div style="margin: 15px 0; padding: 15px; background: #d4edda; border-radius: 12px; border-left: 4px solid #28a745;">
-                        <strong style="color: #155724;">Q: 不会技术怎么办？</strong>
-                        <p style="margin: 8px 0 0 0; color: #666;">
-                            A: 我们提供3小时师训，手把手教您操作。赠送导入模板和测试题，您只需按照模板填充内容即可。
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 第11页：联系 -->
-            <section>
-                <h2>立即咨询</h2>
-                <div class="contact-info" style="margin-top: 50px;">
-                    <p><span class="highlight">定位：卖系统框架，不是卖内容</span></p>
-                    <p><span class="highlight">核心价值：源码交付，数据自主，永久可用</span></p>
-                    <p style="margin-top: 40px;">在线体验：124.223.8.41</p>
-                    <p style="margin-top: 20px; font-size: 0.8em; color: #666;">
-                        微信扫描网站首页二维码咨询
-                    </p>
-                </div>
-            </section>
-            
-            <!-- 第12页：结束 -->
-            <section class="cover-slide">
-                <h1>感谢观看</h1>
-                <p style="font-size: 1.2em;">把教学系统掌握在自己手里</p>
-                <p style="margin-top: 50px; font-size: 0.8em; opacity: 0.8;">
-                    CodeLearn 编程教学系统 · 源码交付 · 永久拥有
+                <div class="thanks">感谢观看</div>
+                <p style="font-size: 1.2em; color: var(--gray); margin-top: 1em;">
+                    CodeLearn 编程教学系统
+                </p>
+                <p style="color: var(--primary); margin-top: 2em;">
+                    联系我们开启您的专属编程教学平台
                 </p>
             </section>
             
@@ -423,13 +557,12 @@
         Reveal.initialize({
             hash: true,
             slideNumber: 'c/t',
-            transition: 'slide',
-            transitionSpeed: 'default',
-            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
             center: true,
-            width: 1280,
-            height: 720,
-            margin: 0.1
+            transition: 'slide',
+            width: 1200,
+            height: 700
         });
     </script>
 </body>
